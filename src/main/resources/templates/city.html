@@ -58,9 +58,10 @@
             2 to [[${cityInfoModel.getCity().getName()}]] sign up here 
       <p>
       
-	    <form action="#" th:action="@{/cities/reservation}" th:object="${reservation}">
+	    <form action="#" th:action="@{/cities/reservation(city=
+            ${cityInfoModel.getCity().getName()})}" method="post">
 		    <fieldset>
-		      <input type="hidden" th:field="*{cityName}" th:value="${cityInfoModel.getCity().getName()}"/>
+		      <input type="hidden" name="cityName" value="Miami"/>
 		      <label for="email">Email:</label>
 		      <input type="text" name="email" />
 		      <div class="form-group">
