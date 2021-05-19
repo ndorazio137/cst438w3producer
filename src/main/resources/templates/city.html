@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>City Info</title>
+</head>
+<body>
+   <h1 style="text-align:center; font-size:2.5em; color:blue;">City Info</h1>
+   
+   <div>
+     <h3 style="text-align:center; font-size:2em" th:inline="text">
+        [[${cityInfoModel.getCity().getName()}]]</h3>
+     
+     <table style="margin-left:auto; margin-right:auto; 
+            padding:2px; border-spacing:30px; font-size:1em">
+	      <tr>
+	        <td>ID:</td>
+	        <td th:if="${cityInfoModel.getCity().getID() != null}" th:numbers>
+	          [[${cityInfoModel.getCity().getID()}]]</td>
+	      </tr>
+	      <tr>
+	        <td>Country Code:</td>
+	        <td th:if="${cityInfoModel.getCountry().getCode() != null}" th:inline="text">
+	          [[${cityInfoModel.getCountry().getCode()}]]</td>
+	      </tr>
+	      <tr>
+	        <td>Country Name:</td>
+	        <td th:if="${cityInfoModel.getCountry().getName() != null}" th:inline="text">
+	          [[${cityInfoModel.getCountry().getName()}]]</td>
+	      </tr>
+	      <tr>
+	        <td>District:</td>
+	        <td th:if="${cityInfoModel.getCity().getDistrict() != null}" th:inline="text">
+	          [[${cityInfoModel.getCity().getDistrict()}]]</td>
+	      </tr>
+	      <tr>
+	        <td>Population:</td>
+	        <td th:if="${cityInfoModel.getCity().getPopulation()}" th:inline="text">
+	          [[${cityInfoModel.getCity().getPopulation()}]]</td>
+	      </tr>
+	      <tr>
+	        <td>Local Temp:</td>
+	        <td th:if="${cityInfoModel.getTimeAndTemp().getAdjustedTemp()}"
+	              th:inline="text">[[${cityInfoModel.getTimeAndTemp().getAdjustedTemp()}]]<td>
+	      </tr>
+	      <tr>
+	        <td>Local Time:</td>
+	        <td th:if="${cityInfoModel.getTimeAndTemp().getAdjustedTime() != null}" 
+	            th:inline="text">[[${cityInfoModel.getTimeAndTemp().getAdjustedTime()}]]</td>
+	      </tr>
+      </table>
+    </div>
+    
+    <br />
+    
+    <div style="justify-content:center">
+      <p th:inline="text" style="text-align:center;"> For a fabulous weekend get away for 
+            2 to [[${cityInfoModel.getCity().getName()}]] sign up here 
+      <p>
+      
+	    <form action="#" th:action="@{/cities/reservation}" th:object="${reservation}">
+		    <fieldset>
+		      <input type="hidden" th:field="*{cityName}" th:value="${cityInfoModel.getCity().getName()}"/>
+		      <label for="email">Email:</label>
+		      <input type="text" name="email" />
+		      <div class="form-group">
+            <div>
+                <input type="radio" name="level" value="luxury">
+                <label for="Luxury">Luxury</label>
+            </div>
+            <div>
+                <input type="radio" name="level" value="Very Good">
+                <label for="Very Good">Very Good</label>
+            </div>
+            <div>
+                <input type="radio" name="level" value="Good">
+                <label for="Good">Good</label>
+            </div>
+        </div>
+		     </fieldset>
+			   <p><input type="submit" value="Submit" /></p>
+			 </form>
+    </div>
+
+  </body>
+</html>
